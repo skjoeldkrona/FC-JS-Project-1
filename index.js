@@ -20,6 +20,8 @@ function onAddIncomeBtnClick() {
     lastId++
     incomes.push(incomeEntry);
     updateIncomesList();
+    incomeType.value = '';
+    incomeAmount.value = '';
 }
 
 function onEditBtnClick(currentIncomeElem) {
@@ -108,6 +110,8 @@ function onAddOutcomeBtnClick() {
     lastId++
     outcomes.push(outcomeEntry);
     updateOutcomesList();
+    outcomeType.value = '';
+    outcomeAmount.value = '';
 }
 
 function onEditBtnClick(currentOutcomeElem) {
