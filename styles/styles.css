@@ -1,0 +1,121 @@
+body {
+    font-family: 'Avenir', sans-serif;
+    font-weight: bold;
+}
+
+img {
+    display: block;
+    height: 100px;
+    margin: 0 auto;
+    padding: 30px 0px;
+    filter: invert(100%);
+}
+
+#moneyYouHave {
+    display: block;
+    font-size: 25px;
+    color: #fff;
+    text-align: center;
+    margin: 30px;
+}
+
+.container {
+    background-color: rgb(0, 79, 135);
+    margin: 0 auto; 
+    width: 70%;
+}
+
+.container-flex {
+    display: flex;
+    justify-content: center;
+} 
+
+.income, .outcome {
+    width: 50%;
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+}
+
+.income {
+    background-color: rgb(0, 161, 152);
+}
+
+.outcome {
+    background-color: rgb(73, 184, 205);
+}
+
+.header, p {
+    padding: 10px;
+    font-size: 20px;
+}
+
+.input, .button {
+    border-radius: 3px;
+    border: solid 0px #fff;
+    margin: 5px 30px;
+    font-size: 16px;
+}
+    
+.input {    
+    outline: none;
+    height: 25px;
+    margin: 0 5px;
+    font-family: 'Avenir', sans-serif;
+    text-align: center;
+}
+
+.input::placeholder {
+    font-family: 'Avenir', sans-serif;
+    color: rgb(197, 199, 201);
+}
+
+#incomeAmount, #outcomeAmount {
+    width: 80px;
+}
+
+.button {
+    outline: none;
+    height: 28px;
+    width: 85px;
+    background-color: orange;
+    font-family: 'Avenir', sans-serif;
+    font-weight: bold;
+    color: #fff;
+}
+
+.button:active {
+    transform: scale(1.2);
+    transition: .8s;
+}
+
+#incomesListContainer, #outcomesListContainer {
+    background-color: #fff;
+    color: #000;
+    font-weight: normal;
+    text-align: left;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+li {
+    list-style-type: disc;
+    list-style-position: inside;
+    padding: 5px 0;
+}
+
+.sum-border {
+    border-top: 2px solid #fff;
+}
+
+.income-sum, .outcome-sum {
+    text-align: left;
+}
+
+footer {
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px 0;
+}
