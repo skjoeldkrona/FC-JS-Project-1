@@ -17,20 +17,34 @@ function onAddIncomeBtnClick() {
         id: lastId,
     };
     
+    
     lastId++
     incomes.push(incomeEntry);
     updateIncomesList();
     incomeType.value = '';
     incomeAmount.value = '';
+    updateIncomeSum();
 }
 
-function onEditBtnClick(currentIncomeElem) {
+function updateIncomeSum() {
+    let sum = 0;
+    let incomeSum = document.getElementById('incomeTotal');
+    
+    incomes.forEach(elem => {
+            elem = elem.incomeValue;
+            sum += Number(elem);
+        });
+    
+    incomeSum.innerText = ` ${sum} zł `;
+    }  
+
+function onIncomeEditBtnClick(currentIncomeElem) {
     const liElem = document.getElementById(`container-${currentIncomeElem.id}`);   
-    liElem.innerHTML = `<input id="name-${currentIncomeElem.id}" value=${currentIncomeElem.incomeName}></input><input id="value-${currentIncomeElem.id}" style="width: 80px" value=${currentIncomeElem.incomeValue}></input><button onclick="onSaveBtnClick(${currentIncomeElem.id})" class="button">Save</button>`;
+    liElem.innerHTML = `<input id="name-${currentIncomeElem.id}" value=${currentIncomeElem.incomeName}></input><input id="value-${currentIncomeElem.id}" style="width: 80px" value=${currentIncomeElem.incomeValue}></input><button onclick="onIncomeSaveBtnClick(${currentIncomeElem.id})" class="button">Save</button>`;
     
 }
 
-function onSaveBtnClick(id) {
+function onIncomeSaveBtnClick(id) {
     let newIncomeElemName = document.getElementById(`name-${id}`);
     let newIncomeElemValue = document.getElementById(`value-${id}`);
     let newIncomeEntryName = newIncomeElemName.value;
@@ -48,14 +62,16 @@ function onSaveBtnClick(id) {
     modifiedEntryValue.incomeValue= newIncomeEntryValue;
 
     updateIncomesList();
+    updateIncomeSum();
 }
 
-function onRemoveBtnClick(event) {
+function onIncomeRemoveBtnClick(event) {
     incomes = incomes.filter(function(elem) {
         return elem.id !== Number(event.target.id);    
     })
     
     updateIncomesList();
+    updateIncomeSum();
 }
 
 function updateIncomesList() {
@@ -77,7 +93,7 @@ function updateIncomesList() {
         deleteBtn.classList.add('button');
         deleteBtn.style.setProperty('margin', '0 5px');
         incomesTypeAndAmount.appendChild(deleteBtn);
-        deleteBtn.addEventListener('click', onRemoveBtnClick)
+        deleteBtn.addEventListener('click', onIncomeRemoveBtnClick)
         
 
         let editBtn = document.createElement('button');
@@ -87,7 +103,7 @@ function updateIncomesList() {
         editBtn.style.setProperty('margin', '0 5px');
         incomesTypeAndAmount.appendChild(editBtn);
         editBtn.addEventListener('click', function() {
-            onEditBtnClick(incomeElem);
+            onIncomeEditBtnClick(incomeElem);
         });
 
         incomesList.appendChild(incomesTypeAndAmount);
@@ -112,15 +128,30 @@ function onAddOutcomeBtnClick() {
     lastId++
     outcomes.push(outcomeEntry);
     updateOutcomesList();
+    outcomeType.value = '';
+    outcomeAmount.value = '';
+    updateOutcomeSum()
 }
 
-function onEditBtnClick(currentOutcomeElem) {
+function updateOutcomeSum() {
+    let sum = 0;
+    let outcomeSum = document.getElementById('outcomeTotal');
+    
+    outcomes.forEach(elem => {
+        elem = elem.outcomeValue;
+        sum += Number(elem);
+    })
+
+    outcomeSum.innerText = ` ${sum} zł `;
+}
+
+function onOutcomeEditBtnClick(currentOutcomeElem) {
     const liElem = document.getElementById(`container-${currentOutcomeElem.id}`);   
-    liElem.innerHTML = `<input id="name-${currentOutcomeElem.id}" value=${currentOutcomeElem.outcomeName}></input><input id="value-${currentOutcomeElem.id}" style="width: 80px" value=${currentOutcomeElem.outcomeValue}></input><button onclick="onSaveBtnClick(${currentOutcomeElem.id})" class="button">Save</button>`;
+    liElem.innerHTML = `<input id="name-${currentOutcomeElem.id}" value=${currentOutcomeElem.outcomeName}></input><input id="value-${currentOutcomeElem.id}" style="width: 80px" value=${currentOutcomeElem.outcomeValue}></input><button onclick="onOutcomeSaveBtnClick(${currentOutcomeElem.id})" class="button">Save</button>`;
     
 }
 
-function onSaveBtnClick(id) {
+function onOutcomeSaveBtnClick(id) {
     let newOutcomeElemName = document.getElementById(`name-${id}`);
     let newOutcomeElemValue = document.getElementById(`value-${id}`);
     let newOutcomeEntryName = newOutcomeElemName.value;
@@ -138,14 +169,16 @@ function onSaveBtnClick(id) {
     modifiedEntryValue.outcomeValue= newOutcomeEntryValue;
 
     updateOutcomesList();
+    updateOutcomeSum()
 }
 
-function onRemoveBtnClick(event) {
+function onOutcomeRemoveBtnClick(event) {
     outcomes = outcomes.filter(function(elem) {
         return elem.id !== Number(event.target.id);    
     })
     
     updateOutcomesList();
+    updateOutcomeSum()
 }
 
 function updateOutcomesList() {
@@ -167,7 +200,7 @@ function updateOutcomesList() {
         deleteBtn.classList.add('button');
         deleteBtn.style.setProperty('margin', '0 5px');
         outcomesTypeAndAmount.appendChild(deleteBtn);
-        deleteBtn.addEventListener('click', onRemoveBtnClick)
+        deleteBtn.addEventListener('click', onOutcomeRemoveBtnClick)
         
 
         let editBtn = document.createElement('button');
@@ -177,9 +210,13 @@ function updateOutcomesList() {
         editBtn.style.setProperty('margin', '0 5px');
         outcomesTypeAndAmount.appendChild(editBtn);
         editBtn.addEventListener('click', function() {
-            onEditBtnClick(outcomeElem);
+            onOutcomeEditBtnClick(outcomeElem);
         });
 
         outcomesList.appendChild(outcomesTypeAndAmount);
     });
+}
+
+function totalExpenses() {
+    document.getElementById('incomeTotal')
 }
