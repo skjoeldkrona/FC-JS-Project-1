@@ -1,4 +1,5 @@
 // Home budgett app by skjoeldkrona
+'use strict'
 
 let incomes = [];
 let outcomes = [];
@@ -20,6 +21,7 @@ function onAddIncomeBtnClick() {
     lastId++
     incomes.push(incomeEntry);
     updateIncomesList();
+    localStorage.setItem('incomes', JSON.stringify(incomes));
     incomeType.value = '';
     incomeAmount.value = '';
     updateSum();
@@ -48,6 +50,7 @@ function onIncomeSaveBtnClick(id) {
     modifiedEntryValue.incomeValue= newIncomeEntryValue;
 
     updateIncomesList();
+    localStorage.setItem('incomes', JSON.stringify(incomes));
     updateSum();
 }
 
@@ -57,6 +60,7 @@ function onIncomeRemoveBtnClick(event) {
     });
     
     updateIncomesList();
+    localStorage.setItem('incomes', JSON.stringify(incomes));
     updateSum();
 }
 
@@ -111,9 +115,10 @@ function onAddOutcomeBtnClick() {
     lastId++
     outcomes.push(outcomeEntry);
     updateOutcomesList();
+    localStorage.setItem('outcomes', JSON.stringify(outcomes));
     outcomeType.value = '';
     outcomeAmount.value = '';
-    updateSum();
+    updateSum(); 
 }
 
 function onOutcomeEditBtnClick(currentOutcomeElem) {
@@ -139,6 +144,7 @@ function onOutcomeSaveBtnClick(id) {
     modifiedEntryValue.outcomeValue= newOutcomeEntryValue;
 
     updateOutcomesList();
+    localStorage.setItem('outcomes', JSON.stringify(outcomes));
     updateSum();
 }
 
@@ -148,6 +154,7 @@ function onOutcomeRemoveBtnClick(event) {
     });
     
     updateOutcomesList();
+    localStorage.setItem('outcomes', JSON.stringify(outcomes));
     updateSum();
 }
 
@@ -211,7 +218,7 @@ function updateSum() {
         let updatedExpenses = document.getElementById('moneyYouHave');
         
         if (incomeTotal > outcomeTotal) {
-            updatedExpenses.innerText = `You're budget is ${incomeTotal - outcomeTotal} zł`;
+            updatedExpenses.innerText = `Your budget is ${incomeTotal - outcomeTotal} zł`;
         } else if (incomeTotal < outcomeTotal) {
             updatedExpenses.innerText = `You have exceeded your budget by ${outcomeTotal - incomeTotal} zł`; 
         } else {updatedExpenses.innerText = 'You have 0 zł'}
@@ -219,3 +226,27 @@ function updateSum() {
 
     updateMoneyYouHave();
 };
+
+const storeIncomesLocally = () => {
+    if(localStorage.getItem('incomes')) {
+        incomes = JSON.parse(localStorage.getItem('incomes'));
+        updateIncomesList();
+        updateSum();
+    } else {
+        incomes = [];
+    }
+}
+
+storeIncomesLocally();
+
+const storeOutcomesLocally = () => {
+    if(localStorage.getItem('outcomes')) {
+        outcomes = JSON.parse(localStorage.getItem('outcomes'));
+        updateOutcomesList();
+        updateSum();
+    } else {
+        outcomes = [];
+    }
+}
+
+storeOutcomesLocally();
